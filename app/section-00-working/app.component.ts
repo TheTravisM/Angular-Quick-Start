@@ -8,29 +8,10 @@ import { Component } from '@angular/core';
 
     <br/>
 
-    <input [value]="name">
+    <input [value]="name"><br/>
+    <input #namebox [value]="name" (input)="name=namebox.value">
     <br/>
-    <label>Input on Input</label>
-    <input [value]="name" (input)="name=$event.target.value">
-    <br/>
-    <label>Input on Keyup</label>
-    <input [value]="name" (keyup)="name=$event.target.value">
-    <br/>
-    <label>Input on Keyup.Enter</label>
-    <input [value]="name" (keyup.enter)="name=$event.target.value">
-    <br/>
-    <label>Input on blur</label>
-    <input [value]="name" (blur)="name=$event.target.value">
-    <br/>
-    <label>Input on blur or Enter</label>
-    <input [value]="name" (blur)="name=$event.target.value"
-                          (keyup.enter)="name=$event.target.value">
-    <br/>
-    <label>Input on [(ngModel)] two way data binding</label>
-    <input [(ngModel)]="name">
-    <br/>
-    <label>Input on [ngModel] one way data binding</label>
-    <input [ngModel]="name" (ngModelChange)="name=$event"><br><br>
+
     <button (click)="addressClick()">Show Hide Address</button>
 
     <div [hidden]="hideAddress">
