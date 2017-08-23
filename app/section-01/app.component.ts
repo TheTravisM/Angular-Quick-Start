@@ -1,74 +1,80 @@
 import { Component } from '@angular/core';
+import { Customer } from './model';
 
 @Component({
-  selector: 'my-app', // to use me, put <my-app> in index.html
+  selector: 'my-app',
   template: `
-    <h1>Hello {{name}}</h1>
-    <p><i>{{name}} is in the {{region}} region</i></p>
+  <h1>{{customer.name}}</h1>
 
-    <br/>
+  <p>
+    <i> {{customer.name}} is at
+        {{customer.address.street}} in
+        {{customer.address.city}},
+        {{customer.address.state}} in the
+        {{customer.address.region}} region.
+    </i>
+  </p>
 
-    <input [value]="name">
-    <br/>
-    <label>Input on Input</label>
-    <input [value]="name" (input)="name=$event.target.value">
-    <br/>
-    <label>Input on Keyup</label>
-    <input [value]="name" (keyup)="name=$event.target.value">
-    <br/>
-    <label>Input on Keyup.Enter</label>
-    <input [value]="name" (keyup.enter)="name=$event.target.value">
-    <br/>
-    <label>Input on blur</label>
-    <input [value]="name" (blur)="name=$event.target.value">
-    <br/>
-    <label>Input on blur or Enter</label>
-    <input [value]="name" (blur)="name=$event.target.value"
-                          (keyup.enter)="name=$event.target.value">
-    <br/>
-    <label>Input on [(ngModel)] two way data binding</label>
-    <input [(ngModel)]="name">
-    <br/>
-    <label>Input on [ngModel] one way data binding</label>
-    <input [ngModel]="name" (ngModelChange)="name=$event"><br><br>
-    <button (click)="addressClick()">Show Hide Address</button>
+  <fieldset>
+    <label>
+      Name:
+      <input [(ngModel)]="customer.name" placeholder="Customer name">
+    </label>
+  </fieldset>
 
-    <div [hidden]="hideAddress">
+  <br>
+  <label><input type="checkbox" [(ngModel)]="hideAddress"/>Hide address</label>
 
-      <fieldset>
-        <label>Street: </label> {{street}}
-      </fieldset>
-
-      <fieldset>
-        <label>City: </label> {{city}}
-      </fieldset>
-
-      <fieldset>
-        <label>Region: </label>
-          <select (change)="regionChange($event.target.value)">
-            <option>North</option>
-            <option>South</option>
-            <option>East</option>
-            <option>West</option>
-          </select>
-      </fieldset>
-
-    </div>
-  `
+  <div [hidden]="hideAddress">
+    <h3>Address:</h3>
+    <fieldset>
+      <label>
+        Street:
+        <input [(ngModel)]="customer.address.street" placeholder="Street">
+      </label>
+    </fieldset>
+    <fieldset>
+      <label>
+        City:
+        <input [(ngModel)]="customer.address.city" placeholder="City">
+      </label>
+    </fieldset>
+    <fieldset>
+      <label>
+        State:
+        <select [(ngModel)]="customer.address.state">
+          <option>California</option>
+          <option>Ohio</option>
+          <option>Flordia</option>
+          <option>Boston</option>
+        </select>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label>
+        Region:
+        <select [(ngModel)]="customer.address.region">
+          <option>North</option>
+          <option>South</option>
+          <option>East</option>
+          <option>West</option>
+        </select>
+      </label>
+    </fieldset>
+  </div>
+  `,
 })
+
 export class AppComponent  {
-  name = 'Kick Ass Brock Samson';
-  city = 'Anytown';
-  street = '123 Main Street';
-  region = 'north';
+  customer: Customer = {
+    id: 1,
+    name: 'Alex Smith',
+    address: {
+      city: 'Anytown',
+      street: '123 Main Street',
+      state: 'California',
+      region: 'East'
+    }
+  };
   hideAddress = false;
-
-  addressClick() {
-    this.hideAddress = !this.hideAddress;
-  }
-
-  regionChange(region: string) {
-    this.region = region;
-  }
 }
-
