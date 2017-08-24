@@ -2,79 +2,60 @@ import { Component } from '@angular/core';
 import { Customer } from './model';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-app',
-  template: `
-  <h1>{{customer.name}}</h1>
-
-  <p>
-    <i> {{customer.name}} is at
-        {{customer.address.street}} in
-        {{customer.address.city}},
-        {{customer.address.state}} in the
-        {{customer.address.region}} region.
-    </i>
-  </p>
-
-  <fieldset>
-    <label>
-      Name:
-      <input [(ngModel)]="customer.name" placeholder="Customer name">
-    </label>
-  </fieldset>
-
-  <br>
-  <label><input type="checkbox" [(ngModel)]="hideAddress"/>Hide address</label>
-
-  <div [hidden]="hideAddress">
-    <h3>Address:</h3>
-    <fieldset>
-      <label>
-        Street:
-        <input [(ngModel)]="customer.address.street" placeholder="Street">
-      </label>
-    </fieldset>
-    <fieldset>
-      <label>
-        City:
-        <input [(ngModel)]="customer.address.city" placeholder="City">
-      </label>
-    </fieldset>
-    <fieldset>
-      <label>
-        State:
-        <select [(ngModel)]="customer.address.state">
-          <option>California</option>
-          <option>Ohio</option>
-          <option>Flordia</option>
-          <option>Boston</option>
-        </select>
-      </label>
-    </fieldset>
-    <fieldset>
-      <label>
-        Region:
-        <select [(ngModel)]="customer.address.region">
-          <option>North</option>
-          <option>South</option>
-          <option>East</option>
-          <option>West</option>
-        </select>
-      </label>
-    </fieldset>
-  </div>
-  `,
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css']
 })
 
 export class AppComponent  {
-  customer: Customer = {
-    id: 1,
-    name: 'Alex Smith',
-    address: {
-      city: 'Anytown',
-      street: '123 Main Street',
-      state: 'California',
-      region: 'East'
-    }
-  };
+
+  regions = ['east', 'south', 'north', 'midwest', 'The Wall']
+
+  customers: Customer[] = [
+    {
+      id: 1,
+      name: 'Alex Smith',
+      address: {
+        street: '123 Main Street',
+        city: 'Anytown',
+        state: 'California',
+        region: 'West'
+      }
+    },
+    {
+      id: 2,
+      name: 'Pierre Pasmal',
+      address: {
+        street: '456 Rue de Main',
+        city: 'Quebec City',
+        state: 'Quebec',
+        region: 'East'
+      }
+    },
+    {
+      id: 3,
+      name: 'Margarita Nadie',
+      address: {
+        street: '789 Calle Principal',
+        city: 'Guadalajara',
+        state: 'Jalisco',
+        region: 'South'
+      }
+    },
+    {
+      id: 4,
+      name: 'Katie O\'Leary',
+      address: {
+        street: '137 DeKoven Street',
+        city: 'Chicago',
+        state: 'Illinois',
+        region: 'Midwest'
+      }
+    },
+  ];
+
+  customer: Customer = this.customers[0];
+
   hideAddress = false;
 }
