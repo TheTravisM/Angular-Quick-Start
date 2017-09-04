@@ -1,4 +1,12 @@
-<h1>{{customer.name}}</h1>
+<h1>
+  <button (click)="left()">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  {{customer.name}}
+  <button (click)="right()">
+    <i class="material-icons">arrow_forward</i>
+  </button>
+</h1>
 
 <p>
   <i> {{customer.name}} is at
@@ -17,36 +25,11 @@
 </fieldset>
 
 <br>
-<label><input type="checkbox" [(ngModel)]="showAddress"/>Show Address</label>
+
+<label>
+  <input type="checkbox" [(ngModel)]="showAddress"/>Show Address
+</label>
 
 <div *ngIf="showAddress">
-  <h3>Address:</h3>
-  <fieldset>
-    <label>
-      Street:
-      <input [(ngModel)]="customer.address.street" placeholder="Street">
-    </label>
-  </fieldset>
-  <fieldset>
-    <label>
-      City:
-      <input [(ngModel)]="customer.address.city" placeholder="City">
-    </label>
-  </fieldset>
-  <fieldset>
-    <label>
-      State:
-      <select [(ngModel)]="customer.address.state">
-        <option *ngFor="let state of states">{{state}}</option>
-      </select>
-    </label>
-  </fieldset>
-  <fieldset>
-    <label>
-      Region:
-      <select [(ngModel)]="customer.address.region">
-        <option *ngFor="let region of regions">{{region}}</option>
-      </select>
-    </label>
-  </fieldset>
+  <my-address [address]="customer.address"></my-address>
 </div>

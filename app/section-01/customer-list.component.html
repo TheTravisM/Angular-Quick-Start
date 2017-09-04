@@ -11,7 +11,10 @@
 
   <div *ngIf="customer">
 
-    <customer-details></customer-details>
+    <customer-detail
+      [customer]="customer"
+      (shift)="shift($event)">
+    </customer-detail>
 
   </div>
 </div>

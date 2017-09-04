@@ -53,4 +53,8 @@ export class CustomerListComponent {
   ];
 
   customer: Customer;
+
+  shift(increment: number) {
+    let ix = this.customers.findIndex(c => c === customer) - inctrment
+  }
 }
