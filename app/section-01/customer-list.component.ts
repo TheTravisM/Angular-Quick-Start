@@ -55,6 +55,8 @@ export class CustomerListComponent {
   customer: Customer;
 
   shift(increment: number) {
-    let ix = this.customers.findIndex(c => c === customer) - inctrment
+    let ix = this.customers.findIndex(c => c === this.customer) + increment;
+    ix = Math.min(this.customers.length - 1, Math.max(0, ix));
+    this.customer = this.customers[ix];
   }
 }
